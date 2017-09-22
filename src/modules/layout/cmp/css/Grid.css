@@ -37,3 +37,6 @@
     width: 12.5%;
 }
 
+.clear {
+    clear: both;
+}

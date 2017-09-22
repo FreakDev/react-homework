@@ -1,9 +1,11 @@
 import React from 'react'
 
-function ProductGridElmt({ face, price }) {
+import './css/ProductGridElmt.css'
+
+function ProductGridElmt({ face, price, size }) {
     return (
-        <div>
-            <div className="face">{ face }</div>
+        <div className="product">
+            <div className="face" style={{ fontSize: size }}>{ face }</div>
             <div>
                 <div className="info">
                     <span className="price">{ price }</span>

@@ -22,7 +22,7 @@ class Grid extends Component {
 
     render() {
         const { data, cols, Elmt, elmtClassName, rowClassName, className } = this.props
-        const nbCols = cols || 5
+        const nbCols = parseInt(cols, 10) || 5
         const gridElmtCls = ['grid-element']
         gridElmtCls.push('grid-' + nbCols)
         elmtClassName && gridElmtCls.push(elmtClassName)
@@ -39,13 +39,14 @@ class Grid extends Component {
             <div className={ 'grid' + (className ? ' ' + className : '') }>
                 { griddedData.map((rowData, r) => (
                     <div key={ this.state.id + '-' + r } className={ 'grid-row' + (rowClassName ? ' ' + rowClassName : '') }>
-                        { rowData.map( (gridElmtProps, c) => (
+                        { rowData.map( (gridElmtProps, c) => gridElmtProps && (
                         <div className={ gridElmtCls.join(' ') }>
                             { React.createElement(Elmt, Object.assign(gridElmtProps, { key: this.state.id + '-' + r + '-' + c })) }
                         </div>
                         )) }
                     </div>
                 )) }
+                <div className="clear">&nbsp;</div>
             </div>
         )
     }

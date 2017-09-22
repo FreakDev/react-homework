@@ -1,3 +1,14 @@
 .App {
-  
+    width: 920px;
+    margin: auto;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: rgba(0,0,0,0.5) 0px 0px 10px;
+}
+
+
+header {
+    padding: 1%;
+    text-align: center;
 }

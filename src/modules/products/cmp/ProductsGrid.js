@@ -6,6 +6,8 @@ import ProductGridElmt from './ProductGridElmt'
 
 import { onLoad } from '../actions'
 
+import './css/ProductGrid.css'
+
 class ProductGrid extends Component {
 
     componentDidMount() {
@@ -13,17 +15,9 @@ class ProductGrid extends Component {
     }
 
     render() {
-        console.log(this.props.data)
         return (
             <section className="products">
-                <Grid data={ this.props.data } Elmt={ ProductGridElmt } />
-                {/* { this.props.data.map((product) => {
-                    return (
-                        <div className="grid-element">
-                            
-                        </div>
-                    )
-                }) } */}
+                <Grid data={ this.props.data } Elmt={ ProductGridElmt } cols="3" />
             </section>        
         )    
     }

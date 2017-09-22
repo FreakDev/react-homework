@@ -1,0 +1,13 @@
+
+.grid .product {
+    padding: 2%;
+}
+
+.face {
+    line-height: 5em;
+    display: inline-block;
+}
+
+.price {
+    float:right;
+}
