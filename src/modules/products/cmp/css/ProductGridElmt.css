@@ -4,10 +4,22 @@
 }
 
 .face {
-    line-height: 5em;
+    /* height: 100px; */
+    line-height: 100px;
     display: inline-block;
 }
 
 .price {
     float:right;
+    font-size: 1.5em;
+}
+
+.info p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.info p .date {
+    font-size: 0.9em;
+    font-weight: normal;
 }
