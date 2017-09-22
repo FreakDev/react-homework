@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Price from './Price'
+
 import './css/ProductGridElmt.css'
 
 function ProductGridElmt({ face, price, size }) {
@@ -8,7 +10,7 @@ function ProductGridElmt({ face, price, size }) {
             <div className="face" style={{ fontSize: size }}>{ face }</div>
             <div>
                 <div className="info">
-                    <span className="price">{ price }</span>
+                    <Price value={ price } />
                 </div>
                 <div className="buttons">
                     <div className="button add-to-cart">add to cart</div>
