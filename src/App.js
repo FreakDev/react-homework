@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { ProductsGrid } from './modules/products'
+
 
 import './App.css';
 
@@ -15,10 +17,8 @@ class App extends Component {
             <p>But first, a word from our sponsors:</p> <script>document.write('<img className="ad" src="/ad/?r=' + Math.floor(Math.random()*1000) + '"/>');</script>
         </header>
 
-        <section className="products">
-            ... products go here ...
-        </section>
-    </div>
+        <ProductsGrid />
+      </div>
     );
   }
 }
