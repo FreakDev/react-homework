@@ -40,8 +40,8 @@ class Grid extends Component {
                 { griddedData.map((rowData, r) => (
                     <div key={ this.state.id + '-' + r } className={ 'grid-row' + (rowClassName ? ' ' + rowClassName : '') }>
                         { rowData.map( (gridElmtProps, c) => gridElmtProps && (
-                        <div className={ gridElmtCls.join(' ') }>
-                            { React.createElement(Elmt, Object.assign(gridElmtProps, { key: this.state.id + '-' + r + '-' + c })) }
+                        <div className={ gridElmtCls.join(' ') } key={ this.state.id + '-' + r + '-' + c } >
+                            { React.createElement(Elmt, Object.assign(gridElmtProps)) }
                         </div>
                         )) }
                     </div>

@@ -17,7 +17,7 @@ class ProductGrid extends Component {
     render() {
         return (
             <section className="products">
-                <Grid data={ this.props.data } Elmt={ ProductGridElmt } cols="3" />
+                <Grid data={ this.props.data } Elmt={ ProductGridElmt } cols={3} />
             </section>        
         )    
     }
