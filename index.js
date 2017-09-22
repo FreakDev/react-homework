@@ -1,5 +1,5 @@
 var http = require('http');
-var serveStaticFiles = require('ecstatic')({ root: __dirname + '/static' });
+var serveStaticFiles = require('ecstatic')({ root: __dirname + '/public' });
 var port = process.env.PORT || 8000;
 
 http.createServer(function (req, res) {
