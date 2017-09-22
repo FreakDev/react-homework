@@ -19,7 +19,18 @@ export default {
                 })
         })
     },
-    getAds: () => {
+    getAds: (code) => {
+        return new Promise((resolve, fail) => {
+            fetch (`http://localhost:8000/ad?r=${code}`)
+                .then(response => {
+                    if (!response.ok)
+                        throw new Error('http request fail')
 
+                    resolve(response.url)
+                })
+                .catch(e => {
+                    fail(e)
+                })
+        })
     }
 }
