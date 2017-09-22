@@ -11,7 +11,6 @@ export default {
                 .then(response => response && response.text())
                 .then(text => {
                     const dataText = '[' + text.trim().replace(/\n/g, ',') + ']'
-                    console.log(dataText)
                     resolve(JSON.parse(dataText))
                 })
                 .catch(e => {

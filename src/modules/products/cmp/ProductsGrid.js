@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { Grid } from '../../../modules/layout'
+import ProductGridElmt from './ProductGridElmt'
+
 import { onLoad } from '../actions'
 
-class ProductGridCmp extends Component {
+class ProductGrid extends Component {
 
     componentDidMount() {
         this.props.dispatch(onLoad())
     }
 
     render() {
+        console.log(this.props.data)
         return (
             <section className="products">
-                ... products go here ...
+                <Grid data={ this.props.data } Elmt={ ProductGridElmt } />
+                {/* { this.props.data.map((product) => {
+                    return (
+                        <div className="grid-element">
+                            
+                        </div>
+                    )
+                }) } */}
             </section>        
         )    
     }
 }
 
-export default connect()(ProductGridCmp)
+const mapStateToProps = state => {
+    return {
+        data: state.products.list
+    }
+}
+
+export default connect(mapStateToProps)(ProductGrid)
