@@ -5,7 +5,20 @@ import * as actions from './actions'
 function list(state = [], act) {
     switch (act.type) {
         case actions.PRODUCTS_DATA_LOADED:
+            return act.data
+        case actions.PRODUCTS_CACHE_POP:
             return [...state,...act.data]
+        default:
+            return state
+    }
+}
+
+function cache(state = [], act) {
+    switch (act.type) {
+        case actions.PRODUCTS_CACHE_LOADED:
+            return [...state,...act.data]
+        case actions.PRODUCTS_CACHE_POP:
+            return state.slice(act.data.length)
         default:
             return state
     }
@@ -21,7 +34,8 @@ function loading(state = false, act) {
 }
 
 export default combineReducers({
-    list,
+    list,    
+    cache,
     loading
 })
  

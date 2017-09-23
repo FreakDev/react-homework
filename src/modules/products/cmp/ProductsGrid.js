@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Grid } from '../../../modules/layout'
 import ProductGridElmt from './ProductGridElmt'
 
-import { loadMore } from '../actions'
+import { loadMore, cachePop } from '../actions'
 
 import './css/ProductGrid.css'
 
@@ -24,9 +24,9 @@ class ProductGrid extends Component {
 
     handleScroll() {
         if ((new Date()).getTime() - lastHandleScroll > 300) {
-            if (window.scrollY > (document.body.offsetHeight - window.innerHeight) * 0.65) {
+            if (window.innerHeight + window.scrollY > document.body.offsetHeight * 0.90) {
                 if (!this.props.loading) {
-                    this.props.dispatch(loadMore())
+                    this.props.dispatch(cachePop(5))
                 }
             }
             lastHandleScroll = (new Date()).getTime()
