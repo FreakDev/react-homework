@@ -44,7 +44,7 @@ class Grid extends Component {
         elmtClassName && gridElmtCls.push(elmtClassName)
 
         if (this.state.order) {
-            data.sort((el1, el2) => el1[this.state.order] > el2[this.state.order])
+            data.sort((el1, el2) => el1[this.state.order] > el2[this.state.order] ? 1 : -1)
         }
 
         const orderOptions = data.length ? Object.keys(data[0]) : []
