@@ -44,7 +44,7 @@ class ProductGrid extends Component {
     }
 
     render() {
-        const { data, loading } = this.props
+        const { data, loading, hasDisplayedAll } = this.props
         return (
             <section className="products">
                 <Grid title="Products" data={ data } Elmt={ ProductGridElmt } cols={3} />
@@ -52,6 +52,10 @@ class ProductGrid extends Component {
                     ? (<div className="loading">Loading...</div>)
                     : '' 
                 }
+                { hasDisplayedAll 
+                    ? (<div className="end">~ end of catalogue ~</div>)
+                    : '' 
+                }                
             </section>        
         )    
     }
@@ -60,7 +64,8 @@ class ProductGrid extends Component {
 const mapStateToProps = state => {
     return {
         data: state.products.list,
-        loading: state.products.loading
+        loading: state.products.loading,
+        hasDisplayedAll: state.products.hasDisplayedAll
     }
 }
 

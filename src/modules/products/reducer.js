@@ -33,9 +33,19 @@ function loading(state = false, act) {
     }
 }
 
+function hasAll(state = false, act) {
+    return act.type === actions.PRODUCTS_NO_MORE || state
+}
+
+function hasDisplayedAll(state = false, act) {
+    return act.type === actions.PRODUCTS_CACHE_EMPTY || state
+}
+
 export default combineReducers({
     list,    
     cache,
-    loading
+    loading,
+    hasAll,
+    hasDisplayedAll
 })
  
