@@ -27,6 +27,7 @@ class Grid extends Component {
         this.setState({
             order
         })
+        this.props.onChangeGridOrder && this.props.onChangeGridOrder(order)
     }
 
     componentWillMount() {
@@ -36,7 +37,7 @@ class Grid extends Component {
     }
 
     render() {
-        const { data, cols, Elmt, order, title, elmtClassName, rowClassName, className } = this.props
+        const { data, cols, Elmt, title, elmtClassName, rowClassName, className } = this.props
         const nbCols = parseInt(cols, 10) || 5
         const gridElmtCls = ['grid-element']
         gridElmtCls.push('grid-' + nbCols)
@@ -58,7 +59,7 @@ class Grid extends Component {
 
         return (
             <div className={ 'grid' + (className ? ' ' + className : '') }>
-                <GridHeader orderOptions={ orderOptions } onChangeOrder={ this.onChangeGridOrder }>
+                <GridHeader gridId={ this.state.id } orderOptions={ orderOptions } onChangeOrder={ this.onChangeGridOrder }>
                     <h3>{ title }</h3>
                 </GridHeader>
                 { griddedData.map((rowData, r) => (
@@ -83,7 +84,9 @@ Grid.propTypes = {
     elmtClassName: PropTypes.string,
     rowClassName: PropTypes.string,
     className: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    onChangeGridOrder: PropTypes.func
+
 }
 
 export default Grid

@@ -3,7 +3,7 @@ import PropTypes from  'prop-types'
 
 import './css/GridHeader.css'
 
-function GridHeader({ title, orderOptions, onChangeOrder, gridId, children }) {
+function GridHeader({ orderOptions, onChangeOrder, gridId, children }) {
     return (
         <div className="grid-header">
             { orderOptions 
@@ -23,6 +23,12 @@ function GridHeader({ title, orderOptions, onChangeOrder, gridId, children }) {
             { children }
         </div>
     )
+}
+
+GridHeader.propTypes = {
+    orderOptions: PropTypes.array,
+    onChangeOrder:PropTypes.func,
+    gridId: PropTypes.string.isRequired
 }
 
 export default GridHeader
