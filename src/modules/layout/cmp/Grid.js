@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import GridHeader from './GridHeader'
+
 import './css/Grid.css'
 
 var gridInc = 0
@@ -10,8 +12,21 @@ function getGridId() {
 
 class Grid extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.onChangeGridOrder = this.onChangeGridOrder.bind(this)
+    } 
+
     state = {
-        id: -1
+        id: -1,
+        order: ''
+    }
+
+    onChangeGridOrder(order) {
+        this.setState({
+            order
+        })
     }
 
     componentWillMount() {
@@ -21,11 +36,17 @@ class Grid extends Component {
     }
 
     render() {
-        const { data, cols, Elmt, elmtClassName, rowClassName, className } = this.props
+        const { data, cols, Elmt, order, title, elmtClassName, rowClassName, className } = this.props
         const nbCols = parseInt(cols, 10) || 5
         const gridElmtCls = ['grid-element']
         gridElmtCls.push('grid-' + nbCols)
         elmtClassName && gridElmtCls.push(elmtClassName)
+
+        if (this.state.order) {
+            data.sort((el1, el2) => el1[this.state.order] > el2[this.state.order])
+        }
+
+        const orderOptions = data.length ? Object.keys(data[0]) : []
 
         let griddedData = []
         for (let r = 0; r < Math.ceil(data.length / nbCols); r++) {
@@ -37,6 +58,9 @@ class Grid extends Component {
 
         return (
             <div className={ 'grid' + (className ? ' ' + className : '') }>
+                <GridHeader orderOptions={ orderOptions } onChangeOrder={ this.onChangeGridOrder }>
+                    <h3>{ title }</h3>
+                </GridHeader>
                 { griddedData.map((rowData, r) => (
                     <div key={ this.state.id + '-' + r } className={ 'grid-row' + (rowClassName ? ' ' + rowClassName : '') }>
                         { rowData.map( (gridElmtProps, c) => gridElmtProps && (
@@ -58,7 +82,8 @@ Grid.propTypes = {
     Elmt: PropTypes.func.isRequired,
     elmtClassName: PropTypes.string,
     rowClassName: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    title: PropTypes.string
 }
 
 export default Grid

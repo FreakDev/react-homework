@@ -10,6 +10,10 @@ import './css/ProductGrid.css'
 
 class ProductGrid extends Component {
 
+    state = {
+        gridOrder: 'id'
+    }
+
     componentDidMount() {
         this.props.dispatch(onLoad())
     }
@@ -17,7 +21,7 @@ class ProductGrid extends Component {
     render() {
         return (
             <section className="products">
-                <Grid data={ this.props.data } Elmt={ ProductGridElmt } cols={3} />
+                <Grid title="Products" data={ this.props.data } Elmt={ ProductGridElmt } cols={3} />
             </section>        
         )    
     }
