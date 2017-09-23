@@ -9,8 +9,15 @@ class Ads extends Component {
         url: ''
     }
 
+    static prevAdsCode = 0
+
     componentDidMount() {
-        api.getAds(Math.floor(Math.random()*1000)).then((url) => {
+        let adsCode
+        do {
+            adsCode = Math.floor(Math.random()*1000)
+        } while (adsCode === Ads.prevAdsCode)
+        
+        api.getAds(adsCode).then((url) => {
             this.setState({
                 url
             })

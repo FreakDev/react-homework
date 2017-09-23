@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { Ads } from '../../../modules/ads'
 import GridHeader from './GridHeader'
 
 import './css/Grid.css'
@@ -37,7 +38,8 @@ class Grid extends Component {
     }
 
     render() {
-        const { data, cols, Elmt, title, elmtClassName, rowClassName, className } = this.props
+        const { data, cols, Elmt, title, elmtClassName, rowClassName, className, adsFrequency } = this.props
+        const adsFreq = adsFrequency || 20
         const nbCols = parseInt(cols, 10) || 5
         const gridElmtCls = ['grid-element']
         gridElmtCls.push('grid-' + nbCols)
@@ -66,6 +68,8 @@ class Grid extends Component {
                     <div key={ this.state.id + '-' + r } className={ 'grid-row' + (rowClassName ? ' ' + rowClassName : '') }>
                         { rowData.map( (gridElmtProps, c) => gridElmtProps && (
                         <div className={ gridElmtCls.join(' ') } key={ this.state.id + '-' + r + '-' + c } >
+                            { ((r + c) && (r * cols + c) % adsFreq === 0) 
+                                && ( <Ads  /> ) }
                             { React.createElement(Elmt, Object.assign(gridElmtProps)) }
                         </div>
                         )) }
