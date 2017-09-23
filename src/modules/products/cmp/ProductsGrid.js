@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Grid } from '../../../modules/layout'
 import ProductGridElmt from './ProductGridElmt'
 
-import { onLoad } from '../actions'
+import { loadMore } from '../actions'
 
 import './css/ProductGrid.css'
 
@@ -15,13 +15,18 @@ class ProductGrid extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(onLoad())
+        this.props.dispatch(loadMore())
     }
 
     render() {
+        const { data, loading } = this.props
         return (
             <section className="products">
-                <Grid title="Products" data={ this.props.data } Elmt={ ProductGridElmt } cols={3} />
+                <Grid title="Products" data={ data } Elmt={ ProductGridElmt } cols={3} />
+                { loading 
+                    ? (<div className="loading">Loading...</div>)
+                    : '' 
+                }
             </section>        
         )    
     }
@@ -29,7 +34,8 @@ class ProductGrid extends Component {
 
 const mapStateToProps = state => {
     return {
-        data: state.products.list
+        data: state.products.list,
+        loading: state.products.loading
     }
 }
 
