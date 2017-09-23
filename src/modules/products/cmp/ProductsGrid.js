@@ -8,14 +8,39 @@ import { loadMore } from '../actions'
 
 import './css/ProductGrid.css'
 
+let lastHandleScroll = 0
+
 class ProductGrid extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.handleScroll = this.handleScroll.bind(this);
+    }
 
     state = {
         gridOrder: 'id'
     }
 
+    handleScroll() {
+        if ((new Date()).getTime() - lastHandleScroll > 300) {
+            if (window.scrollY > (document.body.offsetHeight - window.innerHeight) * 0.65) {
+                if (!this.props.loading) {
+                    this.props.dispatch(loadMore())
+                }
+            }
+            lastHandleScroll = (new Date()).getTime()
+        }
+    }
+
     componentDidMount() {
         this.props.dispatch(loadMore())
+
+        window.addEventListener('scroll', this.handleScroll)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll)
     }
 
     render() {
