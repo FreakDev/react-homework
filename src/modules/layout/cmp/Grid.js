@@ -103,10 +103,11 @@ class Grid extends Component {
         const orderOptions = data.length ? Object.keys(data[0]) : []
 
         return (
+            <div>
+            <GridHeader gridId={ this.state.id } orderOptions={ orderOptions } onChangeOrder={ this.onChangeGridOrder }>
+                <h3>{ title }</h3>
+            </GridHeader>            
             <div className={ 'grid' + (className ? ' ' + className : '') }>
-                <GridHeader gridId={ this.state.id } orderOptions={ orderOptions } onChangeOrder={ this.onChangeGridOrder }>
-                    <h3>{ title }</h3>
-                </GridHeader>
                 { this.state.griddedData.map((rowData, r) => (
                     <div key={ this.state.id + '-' + r } className={ 'grid-row' + (rowClassName ? ' ' + rowClassName : '') }>
                         { rowData.map( (gridElmtProps, c) => 
@@ -125,6 +126,7 @@ class Grid extends Component {
                     </div>
                 )) }
                 <div className="clear">&nbsp;</div>
+            </div>
             </div>
         )
     }

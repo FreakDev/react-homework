@@ -3,15 +3,30 @@
     padding: 2%;
 }
 
+.grid .grid-row {
+    padding-top: 5%;    
+}
+
+.grid .grid-row:first-child {
+    padding-top: 0;
+}
+
 .face {
     /* height: 100px; */
     line-height: 100px;
     display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: rgba(200,200,200,0.1)
 }
 
 .price {
     float:right;
     font-size: 1.5em;
+}
+
+.info {
+    padding-top: 5%;
 }
 
 .info p {
@@ -20,6 +35,6 @@
 }
 
 .info p .date {
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: normal;
 }

@@ -3,7 +3,14 @@
     padding: 1%;
 }
 
+.products .product {
+    margin: 5%;
+    /* border: 1px solid rgba(200,200,200,0.5);
+    box-shadow: rgba(20,20,20,0.5) 1px 3px 5px */
+}
+
 .loading {
+    padding: 5%; 
     text-align: center;
     animation: glow 1s infinite;
 }
