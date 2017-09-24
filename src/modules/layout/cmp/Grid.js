@@ -28,17 +28,16 @@ class Grid extends Component {
     }
 
     onChangeGridOrder(order) {
+        let data = this.props.data.slice().sort((el1, el2) => el1[order] > el2[order] ? 1 : -1)
+
         this.setState({
             order,
-            griddedData: this.makeGriddedData(this.props.data, order)
+            griddedData: this.makeGriddedData(data)
         })
         this.props.onChangeGridOrder && this.props.onChangeGridOrder(order)
     }
 
-    makeGriddedData(data = [], sortOrder = null) {
-        if (sortOrder) {
-            data.sort((el1, el2) => el1[this.state.order] > el2[this.state.order] ? 1 : -1)
-        }
+    makeGriddedData(data = []) {
 
         let griddedData = []
         let globalCount = 0,
