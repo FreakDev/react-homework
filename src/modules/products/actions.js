@@ -8,12 +8,12 @@ export const PRODUCTS_CACHE_EMPTY = 'PRODUCTS_CACHE_EMPTY'
 export const PRODUCTS_NO_MORE = 'PRODUCTS_NO_MORE'
 
 
-export function loadMore () {
+export function loadMore (howMany) {
     return (dispath, getState) => {
         if (!getState().products.loading) {
             const display = !getState().products.list.length
             dispath(loading())
-            api.get()
+            api.get(howMany)
             .then(dataJson => {
                  dispath(loading(false))        
                  if (display) {

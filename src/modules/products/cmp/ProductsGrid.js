@@ -24,9 +24,9 @@ class ProductGrid extends Component {
 
     handleScroll() {
         if ((new Date()).getTime() - lastHandleScroll > 300) {
-            if (window.innerHeight + window.scrollY > document.body.offsetHeight * 0.90) {
+            if (window.innerHeight + window.scrollY > document.body.offsetHeight * 0.80) {
                 if (!this.props.loading) {
-                    this.props.dispatch(cachePop(5))
+                    this.props.dispatch(cachePop(3))
                 }
             }
             lastHandleScroll = (new Date()).getTime()
@@ -34,7 +34,7 @@ class ProductGrid extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(loadMore())
+        this.props.dispatch(loadMore(9))
 
         window.addEventListener('scroll', this.handleScroll)
     }
