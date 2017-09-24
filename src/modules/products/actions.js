@@ -1,5 +1,6 @@
 import api from '../../api'
 
+export const PRODUCTS_ADD_DATA = 'PRODUCTS_ADD_DATA'
 export const PRODUCTS_DATA_LOADED = 'PRODUCTS_DATA_LOADED'
 export const PRODUCTS_LOADING = 'PRODUCTS_LOADING'
 export const PRODUCTS_CACHE_POP = 'PRODUCTS_CACHE_POP'
@@ -8,7 +9,7 @@ export const PRODUCTS_CACHE_EMPTY = 'PRODUCTS_CACHE_EMPTY'
 export const PRODUCTS_NO_MORE = 'PRODUCTS_NO_MORE'
 
 
-export function loadMore (howMany) {
+export function loadMore (howMany, immediateDisplay = -1) {
     return (dispath, getState) => {
         if (!getState().products.loading) {
             const display = !getState().products.list.length
@@ -23,9 +24,19 @@ export function loadMore (howMany) {
                      })
                  } else {
                      if (dataJson.length) {
+                         let data
+                         if (immediateDisplay !== -1) {
+                             data = dataJson.slice(immediateDisplay)
+                             dispath({
+                                type: PRODUCTS_ADD_DATA,
+                                data: dataJson.slice(0, immediateDisplay)
+                            })
+                        } else {
+                             data = dataJson
+                         }
                          dispath({
                              type: PRODUCTS_CACHE_LOADED,
-                             data: dataJson
+                             data
                          })
                      } else {
                          dispath({
@@ -57,7 +68,7 @@ export function cachePop(howMany) {
                 data: (cache.slice(0, howMany))
             });
             if (cache.length < (howMany * 2)) {
-                dispatch(loadMore())
+                dispatch(loadMore(howMany * 4, !cache.length ? howMany : -1))
             }    
         }
     }

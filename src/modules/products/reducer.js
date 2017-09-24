@@ -6,6 +6,8 @@ function list(state = [], act) {
     switch (act.type) {
         case actions.PRODUCTS_DATA_LOADED:
             return act.data
+        case actions.PRODUCTS_ADD_DATA:
+            return [...state, ...act.data]
         case actions.PRODUCTS_CACHE_POP:
             return [...state,...act.data]
         default:
