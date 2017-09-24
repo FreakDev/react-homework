@@ -42,8 +42,10 @@ class Grid extends Component {
         let griddedData = []
         let globalCount = 0,
             lastCount = 0,
-            productCount = 0
-        while (productCount < data.length) {
+            productCount = 0,
+            realProductCount = 0
+
+        while (realProductCount < data.length) {
             let r = Math.floor(globalCount / this.props.cols),
                 c = globalCount % this.props.cols
             griddedData[r] || (griddedData[r] = [])
@@ -51,8 +53,13 @@ class Grid extends Component {
                 griddedData[r][c] = { ads: true }
                 lastCount = productCount
             } else {
-                griddedData[r][c] = data[productCount]
-                productCount++
+                if (!data[realProductCount].ads) {
+                    griddedData[r][c] = data[realProductCount]
+                    productCount++    
+                } else {
+                    globalCount--
+                }
+                realProductCount++                
             }
 
             globalCount++
@@ -64,8 +71,17 @@ class Grid extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.data !== nextProps.data) {
+
+            function flatten(arr) {
+                return arr.reduce(function (flat, toFlatten) {
+                    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+                }, []);
+            }
+
+            let data = [...flatten(this.state.griddedData), ...nextProps.data.slice(this.props.data.length - nextProps.data.length)]
+
             this.setState({
-                griddedData: this.makeGriddedData(nextProps.data, this.state.order)
+                griddedData: this.makeGriddedData(data, this.state.order)
             })
         }
     }
