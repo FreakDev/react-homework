@@ -16,7 +16,7 @@ class Ads extends Component {
         do {
             adsCode = Math.floor(Math.random()*1000)
         } while (adsCode === Ads.prevAdsCode)
-        
+        Ads.prevAdsCode = adsCode
         api.getAds(adsCode).then((url) => {
             this.setState({
                 url
