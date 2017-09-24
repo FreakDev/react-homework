@@ -15,6 +15,9 @@ class ProductGrid extends Component {
     constructor(props) {
         super(props)
 
+        this._scrollPos = {}
+        this._scrollDiff = {}
+
         this.handleScroll = this.handleScroll.bind(this);
     }
 
@@ -24,7 +27,10 @@ class ProductGrid extends Component {
 
     handleScroll() {
         if ((new Date()).getTime() - lastHandleScroll > 300) {
-            if (window.innerHeight + window.scrollY > document.body.offsetHeight * 0.80) {
+            this._scrollDiff = { x: window.scrollX - this._scrollPos.x, y: window.scrollY - this._scrollPos.y }
+            this._scrollPos = { x: window.scrollX, y: window.scrollY}
+    
+            if (Math.abs(this._scrollDiff.y) > 0 && window.innerHeight + window.scrollY > document.body.offsetHeight * 0.80) {
                 if (!this.props.loading) {
                     this.props.dispatch(cachePop(3))
                 }
